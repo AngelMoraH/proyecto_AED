@@ -1,30 +1,34 @@
 #include <string>
+#include <ctime>
 #include <iostream>
 
 using namespace std;
 
 struct Transaction{
-    int index=0;
-    //datos de nuestra base de datos
+    string index;
+    //Informacion de la transaccion
+    string senderKey;
+    string recieverKey; 
+    string time;
 
-    Transaction(){
-        index = 0;
-        //datos de nuestra base de datos
+    Transaction(double val, string sender, string reciever, time_t time){
+        index = to_string(val);
+        senderKey = sender;
+        recieverKey = reciever;
+        this->time = ctime(&time); 
     }
 
-    int get_index(){
-        return index;
+    string get_data_as_string(){ //retun datos como un unico string
+        string result = ""; 
+        result = (this->index + this->senderKey + this->recieverKey + this->time ); 
+        return result; 
     }
-
-    string get_data_as_string();//retun datos como un unico string
-
-    void transaction_create(int& indice){
-        index= indice;
-        indice++;
-        //obtencion de datos para la transaccion
-    }
-
+    
     void display(){
         //impresion de datos
+        cout << "index: " << index << endl;
+        cout << "senderkeyy: " << senderKey << endl;
+        cout << "recieverkey: " << recieverKey << endl;
+        cout << "time: " << time << endl;
     }
-};
+};  
