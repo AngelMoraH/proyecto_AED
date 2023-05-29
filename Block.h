@@ -26,6 +26,7 @@ public:
         this->hash = new SHA256(data->get_data() + this->prev);
         this->is_valid = true;
     };
+
     Block(Transaction *_data, unsigned long int _nonce = 1)
     {
         this->nonce = _nonce;
@@ -37,6 +38,7 @@ public:
         else
             this->is_valid = true;
     }
+
     void set_id(unsigned int _id_block, string _prev_hash)
     {
         this->id = _id_block;
@@ -49,6 +51,7 @@ public:
             this->prev = _prev_hash;
         }
     }
+    
     void mine()
     {
         SHA256 *hashToMine;

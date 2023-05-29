@@ -35,4 +35,4 @@ struct Transaction
     }
 };
 
-#endif TRANSACTION_H
+#endif

@@ -268,7 +268,7 @@ public:
         head = tail = nullptr;
         // throw ("sin definir");
     }
-    
+
     void reverse()
     {
         auto it = head;
@@ -289,13 +289,7 @@ public:
     string name()
     {
         return "DoubleList";
-    } /*
-     void display(){
-       for (auto it = head; it != nullptr; it = it->next){
-             cout << it->data << " ";
-         }
-       cout << endl;
-     }*/
+    }
 };
 
-#endif DOUBLE_H
+#endif
