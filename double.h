@@ -229,6 +229,8 @@ public:
         }
         // else
         // throw exception ("posicion no valida");
+        static T val;
+        return val;
     }
 
     int size()
