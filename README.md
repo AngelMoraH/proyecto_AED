@@ -36,8 +36,6 @@ Las estructuras de datos implementadas por nuestra cuenta fueron las siguientes:
 2. Heaps: Para la búsqueda de máximo o mínimo.
 3. Hash: Para la búsqueda exacta.
 
-Nuestro proyecto presenta el siguiente diagrama de clases:
-
 Consideraciones:
 
 - La blockchain está compuesta de un conjunto de bloques.
