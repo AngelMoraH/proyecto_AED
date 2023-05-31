@@ -131,7 +131,69 @@ public:
                 }
             }
         } while(repetir);
-}
+    }
+
+    void max_valor()
+    {
+        int opcion;
+        bool repetir = true;
+        do
+        {
+            Clear();
+            cout << "\n\n        Choose an attribute: " << endl;
+            cout << "--------------------" << endl;
+            cout << "1. amount" << endl;
+            cout << "2. tiempo" << endl;
+            cout << "0. End" << endl;
+
+            cout << "\nEnter an option: ";
+            cin >> opcion;
+
+            while (opcion != 0 and opcion != 1 and opcion != 2)
+            {
+                cerr << endl
+                     << "Enter a valid option";
+                cout << "\nEnter an option: ";
+                cin >> opcion;
+            }
+
+            if (opcion == 0)
+            {
+                repetir = false;
+            }
+            else
+            {
+                Clear();
+                switch (opcion)
+                {
+                    case 1:
+                    {
+                        auto start1 = chrono::high_resolution_clock::now();
+                        cout << this->maxheap_amount->get_value() << endl;
+                        auto end1 = chrono::high_resolution_clock::now();
+                        // Calculating total time taken by the program.
+                        calculate_time(start1, end1);
+                        ingrese_0_para_salir();
+                        break;
+                    }
+                    case 2:
+                    {
+                        auto start1 = chrono::high_resolution_clock::now();
+                        cout << this->maxheap_timestamp->get_value() << endl;
+                        auto end1 = chrono::high_resolution_clock::now();
+                        // Calculating total time taken by the program.
+                        calculate_time(start1, end1);
+                        ingrese_0_para_salir();
+                        break;
+                    }
+                    default:
+                        cout << "error in opcion " << endl;
+                        ingrese_0_para_salir();
+                        break;
+                }
+            }
+        } while (repetir);
+    }
 
 
 };
