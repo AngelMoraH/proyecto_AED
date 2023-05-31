@@ -98,9 +98,9 @@ public:
                 switch (opcion) {
                     case 1: {
                                 auto start1 = chrono::high_resolution_clock::now();
-                                auto found = stoi(hash_amount->get(x));
+                                bool found = hash_amount->find(x);
                                 auto end1 = chrono::high_resolution_clock::now();
-                                if(found != 0){
+                                if(found){
                                     cout << "Bloque emisor: " << hash_amount->get(x) << endl;
                                 } else {
                                     cout << "NOT FOUND!" << endl;
@@ -112,9 +112,9 @@ public:
                             }
                     case 2: {
                                 auto start2 = chrono::high_resolution_clock::now();
-                                auto found = stoi(this->hash_timestamp->get(x));
+                                bool found = this->hash_timestamp->find(x);
                                 auto end2 = chrono::high_resolution_clock::now();
-                                if(found != 0){
+                                if(found){
                                    cout << "Bloque emisor: " << hash_amount->get(x) << endl; 
                                 } else {
                                     cout << "NOT FOUND!" << endl;

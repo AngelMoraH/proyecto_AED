@@ -77,7 +77,21 @@ public:
                 return it.value;
             }
         }
-        return 0;
+
+        return TV();
+    }
+
+    bool find(TK key){
+        //Sacamos el index
+        size_t hashcode = getHash(key);
+        int index = hashcode % capacity;
+        //TVerificamos si esta y si se encuentra imprime el valor
+        for (auto it: array[index]){
+            if(it.key == key){
+                return true;
+            }
+        }
+        return false;
     }
 
     void rehashing(){
