@@ -22,14 +22,15 @@ void Menu(Blockchain *block_coin)
         cout << "3. Proof Of Work Test" << endl;
         cout << "4. Arreglar Blockchain" << endl;
         cout << "5. Buscar en el Blockchain" << endl;
-        cout << "6. Salir" << endl;
+        cout << "6. Buscar valores maximos" << endl;
+        cout << "7. Salir" << endl;
 
         cout << endl
              << "Ingrese una opcion: ";
         cin >> rpta;
         cout << endl;
 
-    } while (rpta != '1' && rpta != '2' && rpta != '3' && rpta != '4' && rpta != '5');
+    } while (rpta != '1' && rpta != '2' && rpta != '3' && rpta != '4' && rpta != '5' && rpta != '6' && rpta != '7');
 
     if (rpta == '1')
     { // Creamos y a;adimos el bloque a la blockchain
@@ -83,7 +84,11 @@ void Menu(Blockchain *block_coin)
 
     else if (rpta == '6')
     {
-        cout << endl
-             << "Gracias por usar la plataforma. " << endl;
+        block_coin->max_valor();
+    }
+
+    else if (rpta == '7')
+    {
+        cout << endl << "Gracias por usar la plataforma. " << endl;
     }
 }
