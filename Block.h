@@ -129,6 +129,20 @@ public:
         else
             this->is_valid = true;
     }
+    
+    string get_amount()
+    {
+        return this->data->get_amount();
+    }
+
+    string get_timestamp()
+    {
+        return this->data->get_timestamp();
+    }
+
+    string get_sender_key(){
+        return this->data->get_sender_key();
+    }
 
     string get_data()
     {

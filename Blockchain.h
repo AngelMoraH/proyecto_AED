@@ -5,13 +5,17 @@
 #include <stdio.h>
 #include <vector>
 #include <iomanip>
+#include <chrono>
 #include <ctime>
 #include <stdlib.h>
 #include <string>
 #include "Block.h"
 #include "double.h"
+#include "hash.h"
+#include "MaxHeap.h"
 
 using namespace std;
+using namespace std::chrono;
 
 class Blockchain
 {
@@ -22,13 +26,125 @@ private:
 public:
     // Constructor
     Blockchain() {}
+    
+    //Hash
+    Hash<string, string> *hash_amount = new Hash<string, string>();
+    Hash<string, string> *hash_timestamp = new Hash<string, string>();
+    
+    //Max Heap
+    MaxHeap<string> *maxheap_amount = new MaxHeap<string>();
+    MaxHeap<string> *maxheap_timestamp = new MaxHeap<string>();
 
-    // Public Functions
+
+    // Metodos public
+    void add_to_maxheaps(Block* new_block);
+    void add_to_hash(Block* new_block);
     void addBlock(Transaction *data);
     void show_blockchain();
     void test_proof_work(int id);
     void fix_all();
+
+    void Clear()
+    {
+        cout << "\x1B[2J\x1B[H";
+    }
+
+    void calculate_time(time_point<high_resolution_clock> start2, time_point<high_resolution_clock> end2){
+        auto duration = duration_cast<milliseconds>(end2 - start2);
+        cout << endl << "Time taken by program is : " << duration.count() << " milliseconds.";
+        cout << " sec" << endl;
+    }
+
+    void ingrese_0_para_salir(){
+        int F6;
+        do{
+            cout<<endl<< "Ingrese 0 para salir: ";
+            cin>> F6;
+            Clear();
+        }while(F6 != 0);
+    }
+
+
+    void igual_a_x(){
+
+        int opcion;
+        bool repetir = true;
+        do{
+            Clear();
+            cout << "\n\n        Choose an attribute: " << endl;
+            cout << "--------------------"<<endl;
+            cout << "1. Amount" << endl;
+            cout << "2. tiempo" << endl;
+            cout << "0. End" << endl;
+
+            cout << "\nEnter an option: ";
+            cin >> opcion;
+
+            while(opcion != 0 and opcion != 1 and opcion != 2){
+                cerr << endl << "Enter a valid option";
+                cout << "\nEnter an option: ";
+                cin >> opcion;
+            }
+            if (opcion == 0){
+                repetir = false;
+            } else {
+                string x;
+                Clear();
+                cout << "\n\n        Choose a range: " << endl;
+                cout << "--------------------"<<endl;
+                cout << "\nEnter X: ";
+                cin >> x;
+                Clear();
+                switch (opcion) {
+                    case 1: {
+                                auto start1 = chrono::high_resolution_clock::now();
+                                auto found = stoi(hash_amount->get(x));
+                                auto end1 = chrono::high_resolution_clock::now();
+                                if(found != 0){
+                                    cout << "Bloque emisor: " << hash_amount->get(x) << endl;
+                                } else {
+                                    cout << "NOT FOUND!" << endl;
+                                    return;
+                                }
+                                calculate_time(start1, end1);
+                                ingrese_0_para_salir();
+                                break;
+                            }
+                    case 2: {
+                                auto start2 = chrono::high_resolution_clock::now();
+                                auto found = stoi(this->hash_timestamp->get(x));
+                                auto end2 = chrono::high_resolution_clock::now();
+                                if(found != 0){
+                                   cout << "Bloque emisor: " << hash_amount->get(x) << endl; 
+                                } else {
+                                    cout << "NOT FOUND!" << endl;
+                                    return;
+                                }
+                                calculate_time(start2, end2);
+                                ingrese_0_para_salir();
+                                break;
+                            }
+                    default: {
+                                 cout << "opcion invalido." << endl;
+                                 ingrese_0_para_salir();
+                             }
+                }
+            }
+        } while(repetir);
+}
+
+
 };
+
+void Blockchain::add_to_maxheaps(Block* new_block){
+    maxheap_amount->push(new_block->get_amount());
+    maxheap_timestamp->push(new_block->get_timestamp());
+}
+
+void Blockchain::add_to_hash(Block* new_block){
+    hash_amount->insert(new_block->get_amount(),new_block->get_sender_key());
+    hash_timestamp->insert(new_block->get_timestamp(),new_block->get_sender_key());
+}
 
 void Blockchain::addBlock(Transaction *data)
 {
@@ -41,6 +157,9 @@ void Blockchain::addBlock(Transaction *data)
         new_block->mine();
         this->chain->push_back(new_block);
         this->size_chain = this->chain->size();
+
+        add_to_hash(new_block);
+        add_to_maxheaps(new_block);
     }
     else
     {
@@ -49,6 +168,9 @@ void Blockchain::addBlock(Transaction *data)
         new_block->mine();
         this->chain->push_back(new_block);
         this->size_chain = this->chain->size();
+
+        add_to_hash(new_block);
+        add_to_maxheaps(new_block);
     }
 }
 
@@ -122,5 +244,6 @@ void Blockchain::fix_all()
         hash_tmp = currentBlock->get_hash();
     }
 }
+
 
 #endif

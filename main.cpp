@@ -7,5 +7,6 @@ int main()
 {
     Blockchain *block_coin = new Blockchain();
     Menu(block_coin);
+
     return 0;
 }

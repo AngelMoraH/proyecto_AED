@@ -21,7 +21,8 @@ void Menu(Blockchain *block_coin)
         cout << "2. Imprimir Blockchain" << endl;
         cout << "3. Proof Of Work Test" << endl;
         cout << "4. Arreglar Blockchain" << endl;
-        cout << "5. Salir" << endl;
+        cout << "5. Buscar en el Blockchain" << endl;
+        cout << "6. Salir" << endl;
 
         cout << endl
              << "Ingrese una opcion: ";
@@ -74,8 +75,13 @@ void Menu(Blockchain *block_coin)
              << "Blockchain Arreglada Satisfactoriamente." << endl;
         Menu(block_coin);
     }
-
+    
     else if (rpta == '5')
+    {
+        block_coin->igual_a_x();
+    }
+
+    else if (rpta == '6')
     {
         cout << endl
              << "Gracias por usar la plataforma. " << endl;

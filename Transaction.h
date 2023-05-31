@@ -24,6 +24,21 @@ struct Transaction
         recieverKey = reciever;
         timestamp = ctime(&time);
     }
+    
+    string get_amount()
+    {
+        return this->amount;
+    }
+
+    string get_sender_key()
+    {
+        return this->senderKey;
+    }
+
+    string get_timestamp(){
+        return this->timestamp;
+    }
+
     string get_data()
     {
         string result = "";
